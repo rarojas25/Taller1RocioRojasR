@@ -106,6 +106,29 @@ public class Main{
 					if(opcion == 4)cambiarClave(posicion);
 				}
 			}
+			public static void registrar(String user){
+				if(totalReg >= 300) {
+					System.out.println("Limite de resgistros alcanzados");
+					return;
+				}
+				System.out.println("Fecha: ");
+				String fecha = teclado.nextLine();
+				
+				System.out.println("Horas: ");
+				int horas = leerNumero();
+				
+				System.out.println("Actividad: ");
+				String actividad = teclado.nextLine();
+				
+				usuarioReg[totalReg] = user;
+				fechaReg[totalReg] = fecha;
+				horasReg[totalReg] = horas;
+				actividadReg[totalReg] = actividad;
+				totalReg++;
+				
+				guardarRegistros();
+				}
+			
 			
 	}
 
