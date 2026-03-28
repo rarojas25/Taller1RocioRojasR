@@ -4,6 +4,7 @@
 
 package logica;
 
+import java.io.File;
 import java.util.Scanner;
 
 public class Main{
@@ -34,6 +35,25 @@ public class Main{
 				if(opcion == 1)menuUsuarios();
 				if(opcion == 2)menuAnalisis();
 								
+				}
+			}
+			public static void cargarUsuarios(){
+				try{
+					File archivo = new File("Registros.txt");
+					Scanner lector = new Scanner(archivo);
+					
+					while(lector.hasNextLine()) {
+						String linea = lector.nextLine();
+						String[] partes = linea.split(";");
+						
+						usuarioReg[totalReg] = partes[0];
+						fechaReg[totalReg] = partes[1];
+						horasReg[totalReg] = Integer.parseInt(partes[2]);
+						actividadReg[totalReg] = partes[3];
+						totalReg++;
+					}lector.close();
+				}catch (Exception e){
+					System.out.println("Error al leer usuarios");
 				}
 			}
 			
