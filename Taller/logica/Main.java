@@ -5,6 +5,7 @@
 package logica;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.util.Scanner;
 
 public class Main{
@@ -194,10 +195,10 @@ public class Main{
 				
 				int borrar = posiciones[opcion - 1];
 				
-				for(int i = borrar; i < totalReg - 1; i++) {
-					usuarioReg[i] = usuarioReg[i + 1];
-					fechaReg[i] = fechaReg[i + 1];
-					actividadReg[i] = actividadReg[i + 1];
+				for(int e = borrar; e < totalReg - 1; e++) {
+					usuarioReg[e] = usuarioReg[e + 1];
+					fechaReg[e] = fechaReg[e + 1];
+					actividadReg[e] = actividadReg[e + 1];
 				}
 				totalReg--;
 				guardarRegistros();
@@ -232,25 +233,25 @@ public class Main{
 				int[] suma = new int[300];
 				int contador = 0;
 				
-				for(int i = 0; i < totalReg; i++) {
+				for(int a= 0; a < totalReg; a++) {
 					int pos = -1;
-					for(int j = 0; j < contador;j++ ) {
-						if(actividades[j].equals(actividadReg[i])) {
-							pos = j;
+					for(int b = 0; b < contador;b++ ) {
+						if(actividades[b].equals(actividadReg[a])) {
+							pos = b;
 						}
 					}
 					if(pos == -1) {
-						actividades[contador] = actividadReg[i];
-						suma[contador] = horasReg[i];
+						actividades[contador] = actividadReg[a];
+						suma[contador] = horasReg[a];
 						contador++;
 					}else {
-						suma[pos] += horasReg[i]; 
+						suma[pos] += horasReg[a]; 
 					}
 				}
 				int mayor = 0;
-				for(int i = 1; i < contador; i++) {
-					if(suma[i] > suma[mayor]) {
-						mayor = i;
+				for(int a = 1; a < contador; a++) {
+					if(suma[a] > suma[mayor]) {
+						mayor = a;
 					}
 				}
 				if(contador > 0) {
@@ -258,35 +259,35 @@ public class Main{
 				}
 			}
 			public static void actividadPorUsuario() {
-				for(int u = 0; u < totalUsuarios; u++) {
-					String user = nombres[u];
+				for(int p = 0; p < totalUsuarios; p++) {
+					String user = nombres[p];
 					
 					String[] actividades = new String[300];
 					int[] suma = new int[300];
 					int contador = 0;
 					
-					for(int i = 0; i < totalReg; i++) {
-						if(usuarioReg[i].equals(user)) {
+					for(int c = 0; c < totalReg; c++) {
+						if(usuarioReg[c].equals(user)) {
 							int pos = -1;
-							for(int j = 0; j < contador; j++) {
-								if(actividades[j].equals(actividadReg[j])) {
-									pos = j;
+							for(int d = 0; d < contador; d++) {
+								if(actividades[d].equals(actividadReg[d])) {
+									pos = d;
 								}
 							}
 							if(pos == -1) {
-								actividades[contador] = actividadReg[i];
-								suma[contador] = horasReg[i];
+								actividades[contador] = actividadReg[c];
+								suma[contador] = horasReg[c];
 								contador++;
 							}else {
-								suma[pos] += horasReg[i];
+								suma[pos] += horasReg[c];
 							}
 						}
 					}
 					if(contador > 0) {
 						int mayor = 0;
-						for(int i = 1; i < contador; i++) {
-							if(suma[i] > suma[mayor]) {
-								mayor = i;
+						for(int c = 1; c < contador; c++) {
+							if(suma[c] > suma[mayor]) {
+								mayor = c;
 							}
 						}
 						System.out.println(user + "->" + actividades[mayor] + "-> con " + suma[mayor] + "horas registradas");
@@ -296,27 +297,50 @@ public class Main{
 			public static void usuarioMayorProcras() {
 				int[]suma = new int[50];
 				
-				for(int i = 0; i < totalReg; i++) {
-					for(int j = 0; j < totalUsuarios; j++) {
-						if(nombres[j].equals(usuarioReg[i])) {
-							suma[j] += horasReg[i];
+				for(int d = 0; d < totalReg; d++) {
+					for(int f = 0; f < totalUsuarios; f++) {
+						if(nombres[f].equals(usuarioReg[d])) {
+							suma[f] += horasReg[d];
 						}
 					}
 				}
 				int mayor = 0;
 				
-				for(int i = 1; i < totalUsuarios; i++) {
-					if(suma[i] > suma[mayor]) {
-						mayor = i;
+				for(int d = 1; d < totalUsuarios; d++) {
+					if(suma[d] > suma[mayor]) {
+						mayor = d;
 					}
 				}
 				System.out.println("Usuario con más procrastinación: " + nombres[mayor] + "con" + suma[mayor] + "horas registradas");
 			}
 			public static void mostrarTodo() {
-				for(int i = 0; i < totalReg; i++) {
-					System.out.println(usuarioReg[i] + ";" + fechaReg[i] + ";" + horasReg[i] + ";" + actividadReg[i]);
+				for(int t= 0; t < totalReg; t++) {
+					System.out.println(usuarioReg[t] + ";" + fechaReg[t] + ";" + horasReg[t] + ";" + actividadReg[t]);
+				}
+			}
+			public static void guardarRegistros() {
+				try {
+					FileWriter escritor = new FileWriter("Registros.txt");
+					
+					for(int r = 0; r < totalReg; r++) {
+						escritor.write(usuarioReg[r] + ";" + fechaReg[r] + ";" + horasReg[r] + ";" + actividadReg[r] + "\n");
+					}escritor.close();
+					
+				}catch(Exception e){
+					System.out.println("Error guardando archivos ");
+				}
+			}
+			public static void guardarUsuarios() {
+				try {
+					FileWriter escritor = new FileWriter("Usuarios.txt");
+					
+					for(int u = 0; u < totalUsuarios; u++) {
+						escritor.write(nombres[u] + ";" + claves[u] + "\n");
+					}escritor.close();
+					
+				}catch (Exception e) {
+					System.out.println("Error guardando usuarios ");
 				}
 			}
 			
 	}
-
