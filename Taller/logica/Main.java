@@ -28,10 +28,12 @@ public class Main{
 			
 			int opcion = 0;
 			while(opcion != 3){
-				System.out.println("1) Menú Usuarios");
-				System.out.println("2) Menú Analisis");
-				System.out.println("3) Salir");
+				System.out.println("1) Menú Usuarios ");
+				System.out.println("2) Menú Analisis ");
+				System.out.println("3) Salir ");
+				
 				opcion = leerNumero();
+				
 				if(opcion == 1)menuUsuarios();
 				if(opcion == 2)menuAnalisis();
 								
@@ -54,7 +56,7 @@ public class Main{
 					}lector.close();
 				}catch (Exception e){
 					System.out.println("Error al leer registros");
-				}
+					}
 			}
 			public static void cargarUsuarios() {
 				try {
@@ -92,10 +94,10 @@ public class Main{
 				}
 				int opcion = 0;
 				while(opcion != 5) {
-					System.out.println("1) Registrar actividad");
-					System.out.println("2) Modificar actividad");
-					System.out.println("3) Eliminar actividad");
-					System.out.println("4) Cambiar contraseña");
+					System.out.println("1) Registrar actividad ");
+					System.out.println("2) Modificar actividad ");
+					System.out.println("3) Eliminar actividad ");
+					System.out.println("4) Cambiar contraseña ");
 					System.out.println("5) Salir");
 					
 					opcion = leerNumero();
@@ -127,8 +129,8 @@ public class Main{
 				totalReg++;
 				
 				guardarRegistros();
-				}
-			public static void mostrarActividades(String user, int[] posiciones, int[] cantidad) {
+			}
+			public static void mostrarActividadesUsuario(String user, int[] posiciones, int[] cantidad) {
 				int contador = 0;
 				for(int i; i < totalReg; i++) {
 					if(usuarioReg[i].equals(user)) {
@@ -139,6 +141,33 @@ public class Main{
 				}
 				cantidad[0] = contador;	
 			}
-			
+			public static void moidicar(String user){
+				int[]posiciones = new int[300];
+				int[]cantidad = new int[1];
+				
+				mostrarActividadesUsuario(user, posiciones, cantidad);
+				int opcion = leerNumero();
+				if(opcion <= 0 || opcion > cantidad[0])return;
+				int real = posiciones[opcion - 1];
+				System.out.println("1) Fecha ");
+				System.out.println("2) Horas ");
+				System.out.println("3) Actidad ");
+				
+				int campo = leerNumero();
+				
+				if(campo == 1){
+					System.out.println("Nueva fecha: ");
+					fechaReg[real] = teclado.nextLine();
+				}
+				if(campo == 2){
+					System.out.println("Nuevas horas: ");
+					horasReg[real] = leerNumero();
+				}
+				if(campo ==3){
+					System.out.println("Nueva actividad: ");
+					actividadReg[real] = teclado.nextLine();
+				}
+				guardarRegistros();
+			}
 	}
 
