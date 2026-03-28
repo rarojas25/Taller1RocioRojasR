@@ -312,6 +312,11 @@ public class Main{
 				}
 				System.out.println("Usuario con más procrastinación: " + nombres[mayor] + "con" + suma[mayor] + "horas registradas");
 			}
+			public static void mostrarTodo() {
+				for(int i = 0; i < totalReg; i++) {
+					System.out.println(usuarioReg[i] + ";" + fechaReg[i] + ";" + horasReg[i] + ";" + actividadReg[i]);
+				}
+			}
 			
 	}
 
