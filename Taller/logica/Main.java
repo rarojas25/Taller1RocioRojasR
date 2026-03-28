@@ -76,9 +76,9 @@ public class Main{
 				}
 			}
 			public static void menuUsuarios() {
-				System.out.println("Usuario: ");
+				System.out.print("Usuario: ");
 				String user = teclado.nextLine();
-				System.out.println("Contraseña: ");
+				System.out.print("Contraseña: ");
 				String pass = teclado.nextLine();
 				
 				int posicion = -1;
@@ -227,5 +227,36 @@ public class Main{
 					if(opcion == 4)mostrarTodo();
 				}
 			}
+			public static void actividadTop() {
+				String[] actividades = new String[300];
+				int[] suma = new int[300];
+				int contador = 0;
+				
+				for(int i = 0; i < totalReg; i++) {
+					int pos = -1;
+					for(int j = 0; j < contador;j++ ) {
+						if(actividades[j].equals(actividadReg[i])) {
+							pos = j;
+						}
+					}
+					if(pos == -1) {
+						actividades[contador] = actividadReg[i];
+						suma[contador] = horasReg[i];
+						contador++;
+					}else {
+						suma[pos] += horasReg[i]; 
+					}
+				}
+				int mayor = 0;
+				for(int i = 1; i < contador; i++) {
+					if(suma[i] > suma[mayor]) {
+						mayor = i;
+					}
+				}
+				if(contador > 0) {
+					System.out.println("Actividad más realizada: " + actividades[mayor] + "con" + suma[mayor] + "horas" );
+				}
+			}
+			
 	}
 
