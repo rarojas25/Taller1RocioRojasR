@@ -37,7 +37,7 @@ public class Main{
 								
 				}
 			}
-			public static void cargarUsuarios(){
+			public static void cargarRegistros(){
 				try{
 					File archivo = new File("Registros.txt");
 					Scanner lector = new Scanner(archivo);
@@ -51,6 +51,23 @@ public class Main{
 						horasReg[totalReg] = Integer.parseInt(partes[2]);
 						actividadReg[totalReg] = partes[3];
 						totalReg++;
+					}lector.close();
+				}catch (Exception e){
+					System.out.println("Error al leer registros");
+				}
+			}
+			public static void cargarUsuarios() {
+				try {
+					File archivo = new File("Usuarios.txt"); 
+					Scanner lector = new Scanner(archivo);
+					
+					while(lector.hasNextLine()) {
+						String linea = lector.nextLine();
+						String[] partes = linea.split(";");
+						
+						nombres[totalUsuarios] = partes[0];
+						claves[totalUsuarios] = partes[1];
+						totalUsuarios++;
 					}lector.close();
 				}catch (Exception e){
 					System.out.println("Error al leer usuarios");
