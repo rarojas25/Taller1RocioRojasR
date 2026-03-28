@@ -128,7 +128,17 @@ public class Main{
 				
 				guardarRegistros();
 				}
-			
+			public static void mostrarActividades(String user, int[] posiciones, int[] cantidad) {
+				int contador = 0;
+				for(int i; i < totalReg; i++) {
+					if(usuarioReg[i].equals(user)) {
+						System.out.println((contador + 1) + ")" + usuarioReg[i] + ";" + fechaReg[i] + ";" + fechaReg[i] + ";" + horasReg[i] + ";" + actividadReg[i]);
+						posiciones[contador] = i;
+						contador++;
+					}
+				}
+				cantidad[0] = contador;	
+			}
 			
 	}
 
