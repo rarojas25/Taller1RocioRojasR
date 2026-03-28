@@ -73,6 +73,39 @@ public class Main{
 					System.out.println("Error al leer usuarios");
 				}
 			}
+			public static void menuUsuarios() {
+				System.out.println("Usuario: ");
+				String user = teclado.nextLine();
+				System.out.println("Contraseña: ");
+				String pass = teclado.nextLine();
+				
+				int posicion = -1;
+				
+				for(int i = 0; i < totalUsuarios; i++) {
+					if(nombres[i].equals(user) && claves[i].equals(pass)) {
+						posicion = i;
+					}
+				}
+				if(posicion == -1) {
+					System.out.println("Datos incorrectos");
+					return;
+				}
+				int opcion = 0;
+				while(opcion != 5) {
+					System.out.println("1) Registrar actividad");
+					System.out.println("2) Modificar actividad");
+					System.out.println("3) Eliminar actividad");
+					System.out.println("4) Cambiar contraseña");
+					System.out.println("5) Salir");
+					
+					opcion = leerNumero();
+					
+					if(opcion == 1)registrar(user);
+					if(opcion == 2)modificar(user);
+					if(opcion == 3)eliminar(user);
+					if(opcion == 4)cambiarClave(posicion);
+				}
+			}
 			
 	}
 
