@@ -27,7 +27,7 @@ public class Main{
 			cargarRegistros();
 			
 			int opcion = 0;
-			while(opcion != 3){
+			while(opcion != 3) {
 				System.out.println("1) Menú Usuarios ");
 				System.out.println("2) Menú Analisis ");
 				System.out.println("3) Salir ");
@@ -39,8 +39,8 @@ public class Main{
 								
 				}
 			}
-			public static void cargarRegistros(){
-				try{
+			public static void cargarRegistros( ){
+				try {
 					File archivo = new File("Registros.txt");
 					Scanner lector = new Scanner(archivo);
 					
@@ -54,7 +54,7 @@ public class Main{
 						actividadReg[totalReg] = partes[3];
 						totalReg++;
 					}lector.close();
-				}catch (Exception e){
+				}catch (Exception e) {
 					System.out.println("Error al leer registros");
 					}
 			}
@@ -71,7 +71,7 @@ public class Main{
 						claves[totalUsuarios] = partes[1];
 						totalUsuarios++;
 					}lector.close();
-				}catch (Exception e){
+				}catch (Exception e) {
 					System.out.println("Error al leer usuarios");
 				}
 			}
@@ -92,8 +92,12 @@ public class Main{
 					System.out.println("Datos incorrectos");
 					return;
 				}
+				System.out.println("Acceso correcto!");
+				System.out.println("Bienvenido" + user + "!");
+				
 				int opcion = 0;
 				while(opcion != 5) {
+					System.out.println("Que deseas realizar?" );
 					System.out.println("1) Registrar actividad ");
 					System.out.println("2) Modificar actividad ");
 					System.out.println("3) Eliminar actividad ");
@@ -108,18 +112,18 @@ public class Main{
 					if(opcion == 4)cambiarClave(posicion);
 				}
 			}
-			public static void registrar(String user){
+			public static void registrar(String user) {
 				if(totalReg >= 300) {
 					System.out.println("Limite de resgistros alcanzados");
 					return;
 				}
-				System.out.println("Fecha: ");
+				System.out.print("Fecha: ");
 				String fecha = teclado.nextLine();
 				
-				System.out.println("Horas: ");
+				System.out.print("Duracion: ");
 				int horas = leerNumero();
 				
-				System.out.println("Actividad: ");
+				System.out.print("Tipo de actividad: ");
 				String actividad = teclado.nextLine();
 				
 				usuarioReg[totalReg] = user;
@@ -129,6 +133,7 @@ public class Main{
 				totalReg++;
 				
 				guardarRegistros();
+				System.out.println("Actividad registrada con exito! ");
 			}
 			public static void mostrarActividadesUsuario(String user, int[] posiciones, int[] cantidad) {
 				int contador = 0;
@@ -141,38 +146,44 @@ public class Main{
 				}
 				cantidad[0] = contador;	
 			}
-			public static void modificar(String user){
+			public static void modificar(String user) {
 				int[]posiciones = new int[300];
 				int[]cantidad = new int[1];
 				
 				mostrarActividadesUsuario(user, posiciones, cantidad);
+				
+				System.out.println("0) Regresar ");
 				int opcion = leerNumero();
 				
+				if(opcion == 0)return;
 				if(opcion <= 0 || opcion > cantidad[0])return;
-				
 				int real = posiciones[opcion - 1];
 				
+				System.out.println("0) Regresar ");
 				System.out.println("1) Fecha ");
-				System.out.println("2) Horas ");
-				System.out.println("3) Actidad ");
+				System.out.println("2) Duracion ");
+				System.out.println("3) Tipo de actidad ");
 				
 				int campo = leerNumero();
 				
-				if(campo == 1){
-					System.out.println("Nueva fecha: ");
+				if(campo == 0)return;
+				if(campo ==  1) {
+					System.out.print("Nueva fecha: ");
 					fechaReg[real] = teclado.nextLine();
 				}
-				if(campo == 2){
-					System.out.println("Nuevas horas: ");
+				if(campo == 2) {
+					System.out.print("Nueva Duracion: ");
 					horasReg[real] = leerNumero();
 				}
-				if(campo ==3){
-					System.out.println("Nueva actividad: ");
+				if(campo ==3) {
+					System.out.print("Nuevo tipo de actividad: ");
 					actividadReg[real] = teclado.nextLine();
 				}
 				guardarRegistros();
+				System.out.println("Actividad modificada con exito!");
+				
 			}
-			public static void eliminar(String user){
+			public static void eliminar(String user) {
 				int[]posiciones = new int[300];
 				int[] cantidad = new int[1];
 				
@@ -191,11 +202,30 @@ public class Main{
 				totalReg--;
 				guardarRegistros();
 			}
-			public static void cambiarContraseña(int pos) {
-				System.out.println("Nueva contraseña: ");
+			public static void cambiarClave(int pos) {
+				System.out.print("Nueva contraseña: ");
 				claves[pos] = teclado.nextLine();
-				guardarUsuarios();	
+				guardarUsuarios();
+				System.out.println("Contraseña cambiada con exito! ");
 			}
-			
+			public static void menuAnalisis() {
+				int opcion = 0;
+				System.out.println("Bienvenido al menu de analisis! ");
+				
+				while(opcion != 5) {
+					System.out.println("Que deseas realizar? ");
+					System.out.println("1) Actividad más realizada ");
+					System.out.println("2) Actividad más realizada por cada usuario ");
+					System.out.println("3) Usuario con mayor procastinación ");
+					System.out.println("4) Ver todas las actividades ");
+					System.out.println("5) Salir ");
+					opcion = leerNumero();
+					
+					if(opcion == 1)actividadTop();
+					if(opcion == 2)actividadPorUsuario();
+					if(opcion == 3)usuarioMayor();
+					if(opcion == 4)mostrarTodo();
+				}
+			}
 	}
 
