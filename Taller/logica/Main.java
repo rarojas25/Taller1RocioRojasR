@@ -257,6 +257,42 @@ public class Main{
 					System.out.println("Actividad más realizada: " + actividades[mayor] + "con" + suma[mayor] + "horas" );
 				}
 			}
+			public static void actividadPorUsuario() {
+				for(int u = 0; u < totalUsuarios; u++) {
+					String user = nombres[u];
+					
+					String[] actividades = new String[300];
+					int[] suma = new int[300];
+					int contador = 0;
+					
+					for(int i = 0; i < totalReg; i++) {
+						if(usuarioReg[i].equals(user)) {
+							int pos = -1;
+							for(int j = 0; j < contador; j++) {
+								if(actividades[j].equals(actividadReg[j])) {
+									pos = j;
+								}
+							}
+							if(pos == -1) {
+								actividades[contador] = actividadReg[i];
+								suma[contador] = horasReg[i];
+								contador++;
+							}else {
+								suma[pos] += horasReg[i];
+							}
+						}
+					}
+					if(contador > 0) {
+						int mayor = 0;
+						for(int i = 1; i < contador; i++) {
+							if(suma[i] > suma[mayor]) {
+								mayor = i;
+							}
+						}
+						System.out.println(user + "->" + actividades[mayor] + "-> con " + suma[mayor] + "horas registradas");
+					}
+				}
+			}
 			
 	}
 
