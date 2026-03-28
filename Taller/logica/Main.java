@@ -132,7 +132,7 @@ public class Main{
 			}
 			public static void mostrarActividadesUsuario(String user, int[] posiciones, int[] cantidad) {
 				int contador = 0;
-				for(int i; i < totalReg; i++) {
+				for(int i = 0; i < totalReg; i++) {
 					if(usuarioReg[i].equals(user)) {
 						System.out.println((contador + 1) + ")" + usuarioReg[i] + ";" + fechaReg[i] + ";" + fechaReg[i] + ";" + horasReg[i] + ";" + actividadReg[i]);
 						posiciones[contador] = i;
@@ -147,8 +147,11 @@ public class Main{
 				
 				mostrarActividadesUsuario(user, posiciones, cantidad);
 				int opcion = leerNumero();
+				
 				if(opcion <= 0 || opcion > cantidad[0])return;
+				
 				int real = posiciones[opcion - 1];
+				
 				System.out.println("1) Fecha ");
 				System.out.println("2) Horas ");
 				System.out.println("3) Actidad ");
@@ -169,5 +172,25 @@ public class Main{
 				}
 				guardarRegistros();
 			}
+			public static void eliminar(String user){
+				int[]posiciones = new int[300];
+				int[] cantidad = new int[1];
+				
+				mostrarActividadesUsuario(user, posiciones, cantidad);
+				
+				int opcion = leerNumero();
+				if(opcion <= 0 || opcion > cantidad[0])return;
+				
+				int borrar = posiciones[opcion - 1];
+				
+				for(int i = borrar; i < totalReg - 1; i++) {
+					usuarioReg[i] = usuarioReg[i + 1];
+					fechaReg[i] = fechaReg[i + 1];
+					actividadReg[i] = actividadReg[i + 1];
+				}
+				totalReg--;
+				guardarRegistros();
+			}
+			
 	}
 
