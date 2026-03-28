@@ -22,7 +22,20 @@ public class Main{
 		
 		
 		public static void main(String[]args) {
+			cargarUsuarios();
+			cargarRegistros();
 			
-		
+			int opcion = 0;
+			while(opcion != 3){
+				System.out.println("1) Menú Usuarios");
+				System.out.println("2) Menú Analisis");
+				System.out.println("3) Salir");
+				opcion = leerNumero();
+				if(opcion == 1)menuUsuarios();
+				if(opcion == 2)menuAnalisis();
+								
+				}
+			}
+			
 	}
-}
+
