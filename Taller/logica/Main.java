@@ -141,7 +141,7 @@ public class Main{
 				}
 				cantidad[0] = contador;	
 			}
-			public static void moidicar(String user){
+			public static void modificar(String user){
 				int[]posiciones = new int[300];
 				int[]cantidad = new int[1];
 				
@@ -190,6 +190,11 @@ public class Main{
 				}
 				totalReg--;
 				guardarRegistros();
+			}
+			public static void cambiarContraseña(int pos) {
+				System.out.println("Nueva contraseña: ");
+				claves[pos] = teclado.nextLine();
+				guardarUsuarios();	
 			}
 			
 	}
