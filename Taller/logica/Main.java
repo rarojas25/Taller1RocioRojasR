@@ -223,7 +223,7 @@ public class Main{
 					
 					if(opcion == 1)actividadTop();
 					if(opcion == 2)actividadPorUsuario();
-					if(opcion == 3)usuarioMayor();
+					if(opcion == 3)usuarioMayorProcras();
 					if(opcion == 4)mostrarTodo();
 				}
 			}
@@ -292,6 +292,25 @@ public class Main{
 						System.out.println(user + "->" + actividades[mayor] + "-> con " + suma[mayor] + "horas registradas");
 					}
 				}
+			}
+			public static void usuarioMayorProcras() {
+				int[]suma = new int[50];
+				
+				for(int i = 0; i < totalReg; i++) {
+					for(int j = 0; j < totalUsuarios; j++) {
+						if(nombres[j].equals(usuarioReg[i])) {
+							suma[j] += horasReg[i];
+						}
+					}
+				}
+				int mayor = 0;
+				
+				for(int i = 1; i < totalUsuarios; i++) {
+					if(suma[i] > suma[mayor]) {
+						mayor = i;
+					}
+				}
+				System.out.println("Usuario con más procrastinación: " + nombres[mayor] + "con" + suma[mayor] + "horas registradas");
 			}
 			
 	}
