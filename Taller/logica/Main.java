@@ -23,9 +23,11 @@ public class Main{
 			cargarUsuarios();
 			cargarRegistros();
 			
+			System.out.println("Bienvenido!");
+			
 			int opcion = 0;
 			while(opcion != 3) {
-				System.out.println("1) Menú Usuarios ");
+				System.out.println("\n1) Menú Usuarios ");
 				System.out.println("2) Menú Análisis ");
 				System.out.println("3) Salir ");
 				
@@ -266,7 +268,7 @@ public class Main{
 			
 			while(opcion != 5) {
 				
-				System.out.println("Qué deseas realizar? ");
+				System.out.println("\nQué deseas realizar? ");
 				System.out.println("1) Actividad más realizada ");
 				System.out.println("2) Actividad más realizada por cada usuario ");
 				System.out.println("3) Usuario con mayor procrastinación ");
