@@ -422,7 +422,7 @@ public class Main{
 			public static int leerNumero() {
 				while(true) {
 					try {
-						return Integer.parseInt(teclado.nextLine());
+						return Integer.parseInt(teclado.nextLine().trim());
 					} catch (Exception e) {
 						System.out.print("Ingrese un numero válido: ");
 					}
@@ -431,7 +431,7 @@ public class Main{
 
 			public static String leerFecha() {
 				while(true) {
-					String fecha = teclado.nextLine();
+					String fecha = teclado.nextLine().trim();
 
 					String[] partes = fecha.split("/");
 					if(partes.length != 3) {
