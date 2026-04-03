@@ -106,7 +106,7 @@ public class Main{
 			int opcion = 0;
 			while(opcion != 5) {
 				
-				System.out.println("Qué deseas realizar?" );
+				System.out.println("\nQué deseas realizar?" );
 				System.out.println("1) Registrar actividad ");
 				System.out.println("2) Modificar actividad ");
 				System.out.println("3) Eliminar actividad ");
@@ -185,7 +185,7 @@ public class Main{
 			if(opcion <= 0 || opcion > cantidad[0])return;
 			int real = posiciones[opcion - 1];
 			
-			System.out.println("Qué deseas modificar? ");
+			System.out.println("\nQué deseas modificar? ");
 			System.out.println("0) Regresar ");
 			System.out.println("1) Fecha ");
 			System.out.println("2) Duración ");
