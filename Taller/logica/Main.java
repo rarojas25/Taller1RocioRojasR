@@ -443,10 +443,11 @@ public class Main{
 
 					int dia;
 					int mes;
+					int anio;
 					try {
 						dia = Integer.parseInt(partes[0]);
 						mes = Integer.parseInt(partes[1]);
-						Integer.parseInt(partes[2]);
+						anio = Integer.parseInt(partes[2]);
 					} catch (Exception e) {
 						System.out.print("La fecha debe tener solo números. Use dd/mm/yyyy: ");
 						continue;
@@ -464,6 +465,11 @@ public class Main{
 
 					if(dia < 1 || dia > 31) {
 						System.out.print("Día inválido. Use dd/mm/yyyy: ");
+						continue;
+					}
+					
+					if(anio < 0) {
+						System.out.print("Año inválido. Use dd/mm/yyyy: ");
 						continue;
 					}
 
