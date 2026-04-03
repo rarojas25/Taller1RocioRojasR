@@ -32,13 +32,13 @@ public class Main{
 				opcion = leerNumero();
 				
 				if(opcion < 1 || opcion > 3) {
-					System.out.println("Opción inválida");
+					System.out.println("Opción inválida.");
 					continue;
 				}
 				
 				if(opcion == 1)menuUsuarios();
-				if(opcion == 2)menuAnalisis();				
-				}
+				else if(opcion == 2)menuAnalisis();				
+			}
 			System.out.println("Sistema terminado con éxito!");
 		}
 		
@@ -59,7 +59,7 @@ public class Main{
 				}
 				lector.close();
 			} catch (Exception e) {
-				System.out.println("Error al leer registros");
+				System.out.println("Error al leer registros.");
 				}
 		}
 		public static void cargarUsuarios() {
@@ -77,7 +77,7 @@ public class Main{
 				}
 				lector.close();
 			} catch (Exception e) {
-				System.out.println("Error al leer usuarios");
+				System.out.println("Error al leer usuarios.");
 			}
 		}
 		
@@ -96,12 +96,12 @@ public class Main{
 			}
 			
 			if(posicion == -1) {
-				System.out.println("Usuario o contraseña incorrectos ");
+				System.out.println("Usuario o contraseña incorrectos.");
 				return;
 			}
 			
 			System.out.println("Acceso correcto!");
-			System.out.println("Bienvenido " + user + "!");
+			System.out.println("Bienvenido/a " + user + "!");
 			
 			int opcion = 0;
 			while(opcion != 5) {
@@ -116,24 +116,25 @@ public class Main{
 				opcion = leerNumero();
 				
 				if(opcion < 1 || opcion > 5) {
-					System.out.println("Opción inválida");
+					System.out.println("Opción inválida.");
 					continue;
 				}
 				
 				if(opcion == 1)registrar(user);
-				if(opcion == 2)modificar(user);
-				if(opcion == 3)eliminar(user);
-				if(opcion == 4)cambiarClave(posicion);
+				else if(opcion == 2)modificar(user);
+				else if(opcion == 3)eliminar(user);
+				else if(opcion == 4)cambiarClave(posicion);
 			}
+			System.out.println("Sesión cerrada con éxito!");
 		}
 		
 		public static void registrar(String user) {
 			if(totalReg >= 300) {
-				System.out.println("Límite de registros alcanzado");
+				System.out.println("Límite de registros alcanzado.");
 				return;
 			}
 			System.out.print("Fecha: ");
-			String fecha = teclado.nextLine();
+			String fecha = leerFecha();
 			
 			System.out.print("Duración: ");
 			int horas = leerNumero();
@@ -148,7 +149,7 @@ public class Main{
 			totalReg++;
 			
 			guardarRegistros();
-			System.out.println("Actividad registrada con éxito! ");
+			System.out.println("Actividad registrada con éxito!");
 		}
 		
 		public static void mostrarActividadesUsuario(String user, int[] posiciones, int[] cantidad) {
@@ -156,7 +157,8 @@ public class Main{
 			
 			for(int i = 0; i < totalReg; i++) {
 				if(usuarioReg[i].equals(user)) {
-					System.out.println((contador + 1) + ") " + usuarioReg[i] + ";" + fechaReg[i] + ";" + horasReg[i] + ";" + actividadReg[i]);
+					System.out.println((contador + 1) + ") " + usuarioReg[i] + ", Fecha:" + fechaReg[i] + ", Duración:" + horasReg[i]);
+					System.out.println("    " + actividadReg[i]);
 					posiciones[contador] = i;
 					contador++;
 				}
@@ -173,7 +175,7 @@ public class Main{
 			mostrarActividadesUsuario(user, posiciones, cantidad);
 			
 			if(cantidad[0] == 0) {
-				System.out.println("No tienes actividades registradas");
+				System.out.println("No tienes actividades registradas.");
 				return;
 			}
 			
@@ -193,11 +195,10 @@ public class Main{
 			
 			if(campo == 0)return;
 			
-			switch(campo) {
-			
+			switch(campo) { // Aquí intenté usar un switch en vez de else if :)
 				case 1:
 					System.out.print("Ingrese nueva fecha: ");
-					fechaReg[real] = teclado.nextLine();
+					fechaReg[real] = leerFecha();
 					break;
 				case 2:
 					System.out.print("Ingrese nueva duración: ");
@@ -384,7 +385,8 @@ public class Main{
 		}
 		public static void mostrarTodo() {
 			for(int t= 0; t < totalReg; t++) {
-				System.out.println(usuarioReg[t] + ";" + fechaReg[t] + ";" + horasReg[t] + ";" + actividadReg[t]);
+				System.out.println("Usuario:" + usuarioReg[t] + ", Fecha:" + fechaReg[t] + ", Duración:" + horasReg[t]);
+				System.out.println("Descripción: " + actividadReg[t] + "\n");
 			}
 			if(totalReg == 0) {
 				System.out.println("No hay actividades registradas.");
@@ -420,11 +422,52 @@ public class Main{
 			public static int leerNumero() {
 				while(true) {
 					try {
-						return Integer.parseInt(teclado.nextLine().trim());
+						return Integer.parseInt(teclado.nextLine());
 					} catch (Exception e) {
-						System.out.print("Ingrese un numero valido: ");
+						System.out.print("Ingrese un numero válido: ");
 					}
 				}
 			}
+
+			public static String leerFecha() {
+				while(true) {
+					String fecha = teclado.nextLine();
+
+					String[] partes = fecha.split("/");
+					if(partes.length != 3) {
+						System.out.print("Formato inválido. Use dd/mm/yyyy: ");
+						continue;
+					}
+
+					int dia;
+					int mes;
+					try {
+						dia = Integer.parseInt(partes[0]);
+						mes = Integer.parseInt(partes[1]);
+						Integer.parseInt(partes[2]);
+					} catch (Exception e) {
+						System.out.print("La fecha debe tener solo números. Use dd/mm/yyyy: ");
+						continue;
+					}
+
+					if(partes[0].length() != 2 || partes[1].length() != 2 || partes[2].length() != 4) {
+						System.out.print("Formato inválido. Use dd/mm/yyyy: ");
+						continue;
+					}
+
+					if(mes < 1 || mes > 12) {
+						System.out.print("Mes inválido. Use dd/mm/yyyy: ");
+						continue;
+					}
+
+					if(dia < 1 || dia > 31) {
+						System.out.print("Día inválido. Use dd/mm/yyyy: ");
+						continue;
+					}
+
+					return fecha;
+				}
+			}
+
 			
 	}

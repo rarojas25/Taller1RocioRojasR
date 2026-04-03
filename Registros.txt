@@ -198,5 +198,4 @@ Catalina;05/05/2026;1;programar
 Estefania;05/05/2026;2;Ver mlp
 Martin;06/05/2026;5;ser therian
 Catalina;06/05/2026;6;ser Batman por las noches
-Martin;ola;6;ola
-Martin;hola;1000;jugar gatos y sopa
+Martin;06/10/3030;1000;jugar gatos y sopa
